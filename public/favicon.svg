@@ -1,6 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="45" fill="none" stroke="#c0a080" stroke-width="10"/>
-  <circle cx="50" cy="50" r="35" fill="none" stroke="#8b4513" stroke-width="5"/>
-  <text x="50" y="55" font-family="serif" font-size="24" text-anchor="middle" fill="#8b4513">LR</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#2b2a1f"/>
+      <stop offset="1" stop-color="#121310"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7fa86a"/>
+      <stop offset="1" stop-color="#3e6b3a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="31" fill="url(#bg)"/>
+  <circle cx="32" cy="32" r="27.5" fill="none" stroke="#d8ad55" stroke-width="2"/>
+  <circle cx="32" cy="32" r="24.5" fill="none" stroke="#d8ad55" stroke-width=".8" opacity=".6"/>
+  <path d="M32 12c9 6.5 12.5 14 12.5 20.5S39.5 46 32 52c-7.5-6-12.5-13-12.5-19.5S23 18.5 32 12Z" fill="url(#leaf)" stroke="#d8ad55" stroke-width="1.6"/>
+  <path d="M32 15v38M32 24l-6 5M32 24l6 5M32 33l-7.5 6M32 33l7.5 6M32 42l-5 4.5M32 42l5 4.5" stroke="#e7cf8e" stroke-width="1.2" stroke-linecap="round" fill="none"/>
 </svg>
-

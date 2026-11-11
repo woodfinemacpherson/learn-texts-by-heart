@@ -1,37 +1,28 @@
-# Makefile for running the frontend
+# Convenience targets for Learn by Heart.
+.PHONY: all install start build preview test lint clean help
 
-# Phony targets
-.PHONY: all install start stop clean
-
-# Default target
 all: install start
 
-# Install dependencies for the frontend
-install:
-	@echo "Installing frontend dependencies..."
+install: ## Install dependencies
 	npm install
 
-# Start the frontend
-start:
-	@echo "Starting frontend..."
-	npm start
+start: ## Start the dev server
+	npm run dev
 
-# Stop the frontend
-stop:
-	@echo "Stopping frontend..."
-	@-pkill -f "node.*react-scripts"
+build: ## Build for production into ./build
+	npm run build
 
-# Clean up node_modules and build artifacts
-clean:
-	@echo "Cleaning up..."
-	rm -rf ./node_modules
-	rm -rf ./build
+preview: ## Serve the production build locally
+	npm run preview
 
-# Help target
-help:
-	@echo "Available targets:"
-	@echo "  make install  - Install dependencies for the frontend"
-	@echo "  make start    - Start the frontend"
-	@echo "  make stop     - Stop the frontend"
-	@echo "  make clean    - Remove node_modules and build artifacts"
-	@echo "  make help     - Show this help message"
+test: ## Run the test suite
+	npm test
+
+lint: ## Lint the source
+	npm run lint
+
+clean: ## Remove node_modules and build output
+	rm -rf ./node_modules ./build
+
+help: ## Show this help
+	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-8s %s\n", $$1, $$2}'
