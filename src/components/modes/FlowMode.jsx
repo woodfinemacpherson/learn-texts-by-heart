@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Button, ProgressBar, Stat, Victory } from '../ui';
 import { Icon } from '../icons';
 import { cx } from '../../lib/cx';
@@ -37,6 +37,15 @@ function FlowRound({ text, onAgain }) {
     areaRef.current?.focus();
   }, []);
 
+  // After an undo, put the caret at the end in the same commit as the new
+  // text, so keystrokes typed immediately afterwards land in the right place.
+  const caretRef = useRef(null);
+  useLayoutEffect(() => {
+    if (caretRef.current == null || !areaRef.current) return;
+    areaRef.current.setSelectionRange(caretRef.current, caretRef.current);
+    caretRef.current = null;
+  }, [input]);
+
   const onChange = (e) => {
     const value = e.target.value;
     const next = checkRecital(expected, value);
@@ -72,11 +81,8 @@ function FlowRound({ text, onAgain }) {
       rebuilt = input.slice(0, pos) + ' ';
     }
     setInput(rebuilt);
-    const el = areaRef.current;
-    if (el) {
-      el.focus();
-      requestAnimationFrame(() => el.setSelectionRange(rebuilt.length, rebuilt.length));
-    }
+    caretRef.current = rebuilt.length;
+    areaRef.current?.focus();
   };
 
   if (result.complete) {

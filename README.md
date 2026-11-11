@@ -17,7 +17,7 @@ local storage, and the app has day and night themes.
 
 ## Development
 
-Requires Node 20+.
+Requires Node 26 or newer (see `.nvmrc`; with nvm, run `nvm use`).
 
 ```bash
 npm install
